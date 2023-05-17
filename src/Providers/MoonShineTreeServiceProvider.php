@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace VendorName\PackageName\Providers;
+namespace Leeto\MoonShineTree\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-final class PackageNameServiceProvider extends ServiceProvider
+final class MoonShineTreeServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
@@ -19,7 +19,7 @@ final class PackageNameServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'moonshine-tree');
 
         Blade::withoutDoubleEncoding();
-        Blade::componentNamespace('VendorName\PackageName\View\Components', 'moonshine-tree');
+        Blade::componentNamespace('Leeto\MoonShineTree\View\Components', 'moonshine-tree');
 
         $this->commands([]);
     }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\View\Components;
+namespace Leeto\MoonShineTree\View\Components;
 
-use App\MoonShine\Resources\TreeResource;
+use Leeto\MoonShineTree\Resources\TreeResource;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\View\Component;
@@ -17,7 +17,7 @@ class TreeComponent extends Component
 
     public function render(): View
     {
-        return view('admin.categories.tree-component')
+        return view('moonshine-tree::components.tree-component')
             ->with('data', $this->resource->performTree($this->items));
     }
 }

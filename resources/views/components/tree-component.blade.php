@@ -1,7 +1,7 @@
 @if(isset($data[0]))
 <ul x-data="sortable" data-tree_key="">
     @foreach($data[0] as $item)
-        @include('admin.categories.shared.item', [
+        @include('moonshine-tree::shared.item', [
             'data' => $data,
             'item' => $item,
             'resource' => $resource->setItem($item)

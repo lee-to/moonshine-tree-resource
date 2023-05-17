@@ -1,19 +1,19 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": "Description",
-    "keywords": ["keyword"],
+    "name": "lee-to/moonshine-tree-resource",
+    "description": "Tree resource for moonshine",
+    "keywords": ["moonshine"],
     "type": "library",
     "homepage": "https://moonshine.cutcode.dev",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/:vendor_name/:package_name/issues",
-        "source": "https://github.com/:vendor_name/:package_name"
+        "issues": "https://github.com/lee-to/moonshine-tree-resource/issues",
+        "source": "https://github.com/lee-to/moonshine-tree-resource"
     },
     "authors": [
         {
-            "name": "Author name",
-            "email": "author@example.com",
-            "homepage": "https://example.com"
+            "name": "Danil Shutsky",
+            "email": "thecutcode@gmail.com",
+            "homepage": "https://cutcode.dev"
         }
     ],
     "require": {
@@ -21,26 +21,13 @@
         "ext-curl": "*",
         "ext-json": "*"
     },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5.8",
-        "mockery/mockery": "^1.4.4",
-        "phpstan/phpstan": "^1.4.7",
-        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0",
-        "brianium/paratest": "^6.8"
-    },
     "autoload": {
         "psr-4": {
-            "VendorName\\PackageName\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "VendorName\\PackageName\\Tests\\": "tests/",
-            "VendorName\\PackageName\\Database\\Factories\\": "database/factories/"
+            "Leeto\\MoonShineTree\\": "src/"
         }
     },
     "conflict": {
-        "moonshine/moonshine": "<1.52"
+        "moonshine/moonshine": "<1.57"
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
@@ -49,7 +36,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\PackageName\\Providers\\PackageNameServiceProvider"
+                "Leeto\\MoonShineTree\\Providers\\MoonShineTreeServiceProvider"
             ]
         }
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\PackageName\Resources;
+namespace Leeto\MoonShineTree\Resources;
 
 use DB;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -41,11 +41,12 @@ abstract class TreeResource extends Resource
         $performed = [];
 
         foreach ($resources as $resource) {
-            $parent = is_null($this->treeKey()) || is_null($resource->getItem()->{$this->treeKey()})
+            $item = $resource->getItem();
+            $parent = is_null($this->treeKey()) || is_null($item->{$this->treeKey()})
                 ? 0
-                : $resource->getItem()->{$this->treeKey()};
+                : $item->{$this->treeKey()};
 
-            $performed[$parent][$resource->getItem()->getKey()] = $resource->getItem();
+            $performed[$parent][$item->getKey()] = $item;
         }
 
         return $performed;

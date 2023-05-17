@@ -25,7 +25,7 @@
 
                 @if(isset($data[$item->getKey()]))
                     @foreach($data[$item->getKey()] as $inner)
-                        @include('admin.categories.shared.item', [
+                        @include('moonshine-tree::shared.item', [
                             'data' => $data,
                             'item' => $inner,
                             'resource' => $resource->setItem($inner)
