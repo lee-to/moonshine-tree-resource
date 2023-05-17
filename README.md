@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://moonshine.cutcode.dev" target="_blank">
-<img src="https://github.com/lee-to/moonshine-tree-resource/art/screenshot.png">
+<img src="https://github.com/lee-to/moonshine-tree-resource/blob/master/art/screenshot.png">
 </a>
 </p>
 
