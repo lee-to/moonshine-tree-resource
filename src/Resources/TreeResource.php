@@ -77,16 +77,19 @@ abstract class TreeResource extends Resource
 
                 $caseStatement = $request->str('data')
                     ->explode(',')
+                    ->filter()
                     ->implode(fn($id, $index) => "WHEN {$id} THEN {$index} ");
 
-                $model->newQuery()
-                    ->when(
-                        $this->treeKey(),
-                        fn(Builder $q) => $q->where($this->treeKey(), $request->get('parent'))
-                    )
-                    ->update([
-                        $this->sortKey() => DB::raw("CASE $keyName $caseStatement END")
-                    ]);
+                if ($caseStatement) {
+                    $model->newQuery()
+                        ->when(
+                            $this->treeKey(),
+                            fn(Builder $q) => $q->where($this->treeKey(), $request->get('parent'))
+                        )
+                        ->update([
+                            $this->sortKey() => DB::raw("CASE $keyName $caseStatement END")
+                        ]);
+                }
 
                 return response()->noContent();
             })->name($this->routeNameAlias().'.sortable');
