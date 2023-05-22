@@ -25,6 +25,9 @@ use Leeto\MoonShineTree\Resources\TreeResource;
 
 class CategoryResource extends TreeResource
 {
+    // Required
+    public string $titleField = 'title';
+
     public static string $orderField = 'sorting';
 
     // ... fields, model, etc ...
@@ -50,6 +53,9 @@ use Leeto\MoonShineTree\Resources\TreeResource;
 
 class CategoryResource extends TreeResource
 {
+    // Required
+    public string $titleField = 'title';
+    
     public static string $orderField = 'sorting';
 
     // ... fields, model, etc ...
