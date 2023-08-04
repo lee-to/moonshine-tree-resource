@@ -13,6 +13,7 @@ use MoonShine\Resources\Resource;
 abstract class TreeResource extends Resource
 {
     protected bool $usePagination = false;
+
     protected string $itemsView = 'moonshine-tree::items';
 
     public static string $orderType = 'ASC';
@@ -83,11 +84,15 @@ abstract class TreeResource extends Resource
                     $model->newModelQuery()
                         ->when(
                             $this->treeKey(),
-                            fn(Builder $q) => $q->firstWhere($this->treeKey(), $request->get('parent'))
+                            fn(Builder $q) => $q->where($this->treeKey(), $request->get('parent'))
                         )
-                        ?->update([
-                            $this->sortKey() => DB::raw("CASE $keyName $caseStatement ELSE `{$this->sortKey()}` END")
-                        ]);
+                        ->get()
+                        ->each(function ($row) use($keyName, $caseStatement) {
+                            $row->update([
+                                $this->sortKey() => DB::raw("CASE $keyName $caseStatement ELSE `{$this->sortKey()}` END")
+                            ]);
+                        });
+
                 }
 
                 return response()->noContent();
