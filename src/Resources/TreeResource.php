@@ -66,28 +66,27 @@ abstract class TreeResource extends Resource
                 }
 
                 if ($this->treeKey()) {
-                    $model->newQuery()
-                        ->where($keyName, $request->get('id'))
-                        ->update([
+                    $model->newModelQuery()
+                        ->firstWhere($keyName, $request->get('id'))
+                        ?->update([
                             $this->sortKey() => $request->integer('index'),
                             $this->treeKey() => $request->get('parent')
                         ]);
                 }
 
 
-                $caseStatement = $request->str('data')
-                    ->explode(',')
-                    ->filter()
-                    ->implode(fn($id, $index) => "WHEN {$id} THEN {$index} ");
+                if ($request->str('data')->isNotEmpty()) {
+                    $caseStatement = $request->str('data')
+                        ->explode(',')
+                        ->implode(fn($id, $index) => "WHEN {$id} THEN {$index} ");
 
-                if ($caseStatement) {
-                    $model->newQuery()
+                    $model->newModelQuery()
                         ->when(
                             $this->treeKey(),
-                            fn(Builder $q) => $q->where($this->treeKey(), $request->get('parent'))
+                            fn(Builder $q) => $q->firstWhere($this->treeKey(), $request->get('parent'))
                         )
-                        ->update([
-                            $this->sortKey() => DB::raw("CASE $keyName $caseStatement END")
+                        ?->update([
+                            $this->sortKey() => DB::raw("CASE $keyName $caseStatement ELSE `{$this->sortKey()}` END")
                         ]);
                 }
 

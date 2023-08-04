@@ -1,4 +1,7 @@
-<li class="my-4" data-id="{{ $item->getKey() }}">
+<li class="my-4"
+    data-id="{{ $item->getKey() }}"
+    x-data="{tree_show_{{ $item->getKey() }}: $persist(true).as('tree_resource_{{ $item->getKey() }}')}"
+>
     <x-moonshine::box>
         <div class="flex justify-between items-center gap-4">
             <div class="handle cursor-pointer flex justify-start items-center gap-4">
@@ -8,6 +11,10 @@
                     <x-moonshine::badge color="purple">{{ $item->getKey() }}</x-moonshine::badge>
                     {{ $item->{$resource->titleField()} }}
                 </div>
+
+                <a @click.stop="tree_show_{{ $item->getKey() }} = !tree_show_{{ $item->getKey() }}">
+                    <x-moonshine::icon icon="heroicons.chevron-up-down" />
+                </a>
             </div>
 
             <div class="flex justify-between items-center gap-4">
@@ -21,6 +28,7 @@
         @if($resource->treeKey())
             <ul x-data="sortable"
                 class="dropzone my-4"
+                x-show="tree_show_{{ $item->getKey() }}"
                 data-tree_key="{{ $item->getKey() }}">
 
                 @if(isset($data[$item->getKey()]))

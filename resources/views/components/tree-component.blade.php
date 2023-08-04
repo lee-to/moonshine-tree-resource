@@ -1,13 +1,19 @@
 @if(isset($data[0]))
-<ul x-data="sortable" data-tree_key="">
-    @foreach($data[0] as $item)
-        @include('moonshine-tree::shared.item', [
-            'data' => $data,
-            'item' => $item,
-            'resource' => $resource->setItem($item)
-        ])
-    @endforeach
-</ul>
+<div x-data="{tree_show_all: $persist(true).as('tree_resource_all')}">
+    <a @click.stop="tree_show_all = !tree_show_all">
+        <x-moonshine::icon icon="heroicons.chevron-up-down" />
+    </a>
+
+    <ul x-data="sortable" data-tree_key="" x-show="tree_show_all">
+        @foreach($data[0] as $item)
+            @include('moonshine-tree::shared.item', [
+                'data' => $data,
+                'item' => $item,
+                'resource' => $resource->setItem($item)
+            ])
+        @endforeach
+    </ul>
+</div>
 @endif
 
 <script>
