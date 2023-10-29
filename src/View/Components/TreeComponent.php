@@ -1,23 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Leeto\MoonShineTree\View\Components;
 
-use Leeto\MoonShineTree\Resources\TreeResource;
-use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
-use Illuminate\View\Component;
+use MoonShine\Components\MoonshineComponent;
+use MoonShine\Resources\ModelResource;
+use MoonShine\Traits\HasResource;
 
-class TreeComponent extends Component
+/**
+ * @method static static make(ModelResource $resource)
+ */
+final class TreeComponent extends MoonshineComponent
 {
-    public function __construct(
-        public TreeResource $resource,
-        public Collection $items
-    ) {
+    use HasResource;
+
+    protected string $view = 'moonshine-tree::components.tree.index';
+
+    public function __construct(ModelResource $resource)
+    {
+        $this->setResource($resource);
     }
 
-    public function render(): View
+    protected function items(): array
     {
-        return view('moonshine-tree::components.tree-component')
-            ->with('data', $this->resource->performTree($this->items));
+        $performed = [];
+        $resource = $this->getResource();
+        $items = $resource->items();
+
+        foreach ($items as $item) {
+            $parent = is_null($resource->treeKey()) || is_null($item->{$resource->treeKey()})
+                ? 0
+                : $item->{$resource->treeKey()};
+
+            $performed[$parent][$item->getKey()] = $item;
+        }
+
+        return $performed;
+    }
+
+    protected function viewData(): array
+    {
+        return [
+            'items' => $this->items(),
+            'resource' => $this->getResource(),
+            'route' => $this->getResource()->route('sortable'),
+        ];
     }
 }

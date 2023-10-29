@@ -3,7 +3,7 @@
     "description": "Tree resource for moonshine",
     "keywords": ["moonshine"],
     "type": "library",
-    "homepage": "https://moonshine.cutcode.dev",
+    "homepage": "https://moonshine-laravel.com",
     "license": "MIT",
     "support": {
         "issues": "https://github.com/lee-to/moonshine-tree-resource/issues",
@@ -27,7 +27,7 @@
         }
     },
     "conflict": {
-        "moonshine/moonshine": "<1.57"
+        "moonshine/moonshine": "<2.0"
     },
     "scripts": {
         "test": "vendor/bin/phpunit",

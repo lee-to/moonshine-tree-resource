@@ -9,11 +9,6 @@ use Illuminate\Support\ServiceProvider;
 
 final class MoonShineTreeServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        //
-    }
-
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'moonshine-tree');
