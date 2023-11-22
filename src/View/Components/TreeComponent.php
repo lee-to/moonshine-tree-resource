@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Leeto\MoonShineTree\View\Components;
 
-use MoonShine\Components\MoonshineComponent;
+use MoonShine\Components\MoonShineComponent;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Traits\HasResource;
 
 /**
  * @method static static make(ModelResource $resource)
  */
-final class TreeComponent extends MoonshineComponent
+final class TreeComponent extends MoonShineComponent
 {
     use HasResource;
 
