@@ -2,6 +2,7 @@
     'resource',
     'item',
     'items',
+    'buttons',
 ])
 <li class="my-4"
     data-id="{{ $item->getKey() }}"
@@ -23,11 +24,9 @@
             </div>
 
             <div class="flex justify-between items-center gap-4">
-                <x-moonshine::link-button href="{{ to_page(
-                    resource: $resource,
-                    page: 'form-page',
-                    params: ['resourceItem' => $item->getKey()]
-                ) }}" icon="heroicons.outline.pencil" />
+                <x-moonshine::action-group
+                    :actions="$buttons($item)"
+                />
             </div>
         </div>
 
@@ -48,6 +47,7 @@
                             :items="$items"
                             :item="$inner"
                             :resource="$resource"
+                            :buttons="$buttons"
                         />
                     @endforeach
                 @endif

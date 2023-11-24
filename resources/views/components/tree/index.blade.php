@@ -17,6 +17,7 @@
                     :items="$items"
                     :item="$item"
                     :resource="$resource"
+                    :buttons="$buttons"
                 />
             @endforeach
         </ul>

@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace Leeto\MoonShineTree\View\Components;
 
-use MoonShine\Components\MoonShineComponent;
+use MoonShine\ActionButtons\ActionButtons;
+use MoonShine\Buttons\DeleteButton;
+use MoonShine\Buttons\DetailButton;
+use MoonShine\Buttons\EditButton;
+use MoonShine\Components\MoonshineComponent;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Traits\HasResource;
 
 /**
  * @method static static make(ModelResource $resource)
  */
-final class TreeComponent extends MoonShineComponent
+final class TreeComponent extends MoonshineComponent
 {
     use HasResource;
 
@@ -45,6 +49,16 @@ final class TreeComponent extends MoonShineComponent
             'items' => $this->items(),
             'resource' => $this->getResource(),
             'route' => $this->getResource()->route('sortable'),
+            'buttons' => function($item) {
+                $resource = $this->getResource()->setItem($item);
+
+                return ActionButtons::make([
+                    ...$resource->getIndexButtons(),
+                    DetailButton::for($resource),
+                    EditButton::for($resource, 'tree'),
+                    DeleteButton::for($resource, 'tree'),
+                ])->fillItem($item);
+            }
         ];
     }
 }
