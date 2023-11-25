@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Leeto\MoonShineTree\Resources;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use InvalidArgumentException;
@@ -20,6 +21,11 @@ abstract class TreeResource extends ModelResource
     abstract public function treeKey(): ?string;
 
     abstract public function sortKey(): string;
+
+    public function itemContent(Model $item): string
+    {
+        return '';
+    }
 
     protected function resolveRoutes(): void
     {

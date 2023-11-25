@@ -21,6 +21,8 @@
                 <a @click.stop="tree_show_{{ $item->getKey() }} = !tree_show_{{ $item->getKey() }}">
                     <x-moonshine::icon icon="heroicons.chevron-up-down" />
                 </a>
+
+                {!! $resource->itemContent($item) !!}
             </div>
 
             <div class="flex justify-between items-center gap-4">

@@ -107,3 +107,12 @@ class CategoryResource extends TreeResource
     // ...
 }
 ```
+
+### Additional content
+
+```php
+public function itemContent(Model $item): string
+{
+    return 'Custom content here';
+}
+```
