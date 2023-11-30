@@ -27,6 +27,16 @@ abstract class TreeResource extends ModelResource
         return '';
     }
 
+    public function sortable(): bool
+    {
+        return true;
+    }
+
+    public function wrapable(): bool
+    {
+        return true;
+    }
+
     protected function resolveRoutes(): void
     {
         parent::resolveRoutes();

@@ -116,3 +116,17 @@ public function itemContent(Model $item): string
     return 'Custom content here';
 }
 ```
+
+### Turn off sortable or wrapable
+
+```php
+public function wrapable(): bool
+{
+    return false;
+}
+
+public function sortable(): bool
+{
+    return false;
+}
+```
