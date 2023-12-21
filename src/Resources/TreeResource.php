@@ -42,19 +42,21 @@ abstract class TreeResource extends ModelResource
         parent::resolveRoutes();
 
         Route::post('sortable', function (ViewAnyFormRequest $request) {
-            $keyName = $request->getResource()->getModel()->getKeyName();
-            $model = $request->getResource()->getModel();
+            /** @var TreeResource $resource */
+            $resource = $request->getResource();
+            $keyName = $resource->getModel()->getKeyName();
+            $model = $resource->getModel();
 
-            if ($keyName === $this->sortKey()) {
+            if ($keyName === $resource->sortKey()) {
                 throw new InvalidArgumentException('Primary key cannot be used as a sort');
             }
 
-            if ($this->treeKey()) {
+            if ($resource->treeKey()) {
                 $model->newModelQuery()
                     ->firstWhere($keyName, $request->get('id'))
                     ?->update([
-                        $this->sortKey() => $request->integer('index'),
-                        $this->treeKey() => $request->get('parent')
+                        $resource->sortKey() => $request->integer('index'),
+                        $resource->treeKey() => $request->get('parent')
                     ]);
             }
 
@@ -62,17 +64,19 @@ abstract class TreeResource extends ModelResource
             if ($request->str('data')->isNotEmpty()) {
                 $caseStatement = $request->str('data')
                     ->explode(',')
-                    ->implode(fn($id, $index) => "WHEN {$id} THEN {$index} ");
+                    ->implode(fn($id, $index) => "WHEN $id THEN $index ");
 
                 $model->newModelQuery()
                     ->when(
-                        $this->treeKey(),
-                        fn(Builder $q) => $q->where($this->treeKey(), $request->get('parent'))
+                        $resource->treeKey(),
+                        fn(Builder $q) => $q->where($resource->treeKey(), $request->get('parent'))
                     )
                     ->get()
-                    ->each(function ($row) use($keyName, $caseStatement) {
+                    ->each(function ($row) use($resource, $keyName, $caseStatement) {
                         $row->update([
-                            $this->sortKey() => DB::raw("CASE $keyName $caseStatement ELSE `{$this->sortKey()}` END")
+                            $resource->sortKey() => DB::raw(
+                                "CASE $keyName $caseStatement ELSE {$resource->sortKey()} END"
+                            )
                         ]);
                     });
 
