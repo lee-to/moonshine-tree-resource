@@ -6,7 +6,7 @@
     >
         @if($resource->wrapable())
         <a @click.stop="tree_show_all = !tree_show_all">
-            <x-moonshine::icon icon="heroicons.chevron-up-down" />
+            <x-moonshine::icon icon="chevron-up-down" />
         </a>
         @endif
 

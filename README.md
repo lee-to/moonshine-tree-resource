@@ -8,7 +8,14 @@
 
 ### Requirements
 
-- MoonShine v2.0+
+- MoonShine v3.0+
+
+### Support MoonShine versions
+
+| MoonShine   | Trix |
+|-------------|------|
+| 2.0+        | 1.0+ |
+| 3.0+        | 2.0+ |
 
 ### Installation
 
@@ -77,9 +84,18 @@ class CategoryTreePage extends IndexPage
         ];
     }
 }
-
 ```
 
+Or modify index component from resource
+
+```php
+protected string $sortColumn = 'sorting';
+
+public function modifyListComponent(ComponentContract $component): ComponentContract
+{
+    return TreeComponent::make($this);
+}
+```
 Just a sortable usage
 
 ```php

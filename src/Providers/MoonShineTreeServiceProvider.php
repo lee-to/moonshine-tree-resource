@@ -12,6 +12,7 @@ final class MoonShineTreeServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'moonshine-tree');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/tree.php');
 
         Blade::withoutDoubleEncoding();
         Blade::componentNamespace('Leeto\MoonShineTree\View\Components', 'moonshine-tree');
