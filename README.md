@@ -2,7 +2,7 @@
 
 <p align="center">
 <a href="https://moonshine-laravel.com" target="_blank">
-<img src="https://github.com/lee-to/moonshine-tree-resource/blob/master/art/screenshot.png">
+<img src="https://github.com/lee-to/moonshine-tree-resource/blob/1.x/art/screenshot.png">
 </a>
 </p>
 
