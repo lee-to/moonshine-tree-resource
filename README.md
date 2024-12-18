@@ -40,13 +40,9 @@ class CategoryResource extends TreeResource
     protected function pages(): array
     {
         return [
-            CategoryTreePage::make($this->title()),
-            FormPage::make(
-                $this->getItemID()
-                    ? __('moonshine::ui.edit')
-                    : __('moonshine::ui.add')
-            ),
-            DetailPage::make(__('moonshine::ui.show')),
+            CategoryTreePage::class,
+            FormPage::class,
+            DetailPage::class,
         ];
     }
 
@@ -72,14 +68,14 @@ And add component
 namespace App\MoonShine\Pages;
 
 use Leeto\MoonShineTree\View\Components\TreeComponent;
-use MoonShine\Pages\Crud\IndexPage;
+use MoonShine\Laravel\Pages\Crud\IndexPage;
 
 class CategoryTreePage extends IndexPage
 {
     protected function mainLayer(): array
     {
         return [
-            ...$this->actionButtons(),
+            ...$this->getPageButtons(),
             TreeComponent::make($this->getResource()),
         ];
     }
