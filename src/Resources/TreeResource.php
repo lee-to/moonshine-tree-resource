@@ -37,4 +37,5 @@ abstract class TreeResource extends ModelResource
     {
         return true;
     }
+
 }
