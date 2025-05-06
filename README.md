@@ -58,6 +58,11 @@ class CategoryResource extends TreeResource
         return 'sorting';
     }
 
+    public function showBadge(): bool
+    {
+        return true;
+    }
+
     // ...
 }
 ```
@@ -140,5 +145,12 @@ public function wrapable(): bool
 public function sortable(): bool
 {
     return false;
+}
+```
+### Turn off badge
+```php
+public function showBadge(): bool
+{
+    return true;
 }
 ```

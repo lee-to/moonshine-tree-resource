@@ -18,7 +18,9 @@
                 @endif
 
                 <div class="font-bold">
-                    <x-moonshine::badge color="purple">{{ $item->getKey() }}</x-moonshine::badge>
+                    @if($resource->showBadge())
+                        <x-moonshine::badge color="purple">{{ $item->getKey() }}</x-moonshine::badge>
+                    @endif
                     {{ $item->{$resource->getColumn()} }}
                 </div>
 

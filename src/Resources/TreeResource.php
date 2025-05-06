@@ -32,4 +32,10 @@ abstract class TreeResource extends ModelResource
     {
         return true;
     }
+
+    public function showBadge(): bool
+    {
+        return true;
+    }
+
 }
