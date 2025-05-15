@@ -28,26 +28,22 @@ Route::moonshine(static function () {
                 ]);
         }
 
-
-        if ($request->str('data')->isNotEmpty()) {
-            $caseStatement = $request->str('data')
+        if ($request->filled('data')) {
+            $ids = $request->str('data')
                 ->explode(',')
-                ->implode(fn($id, $index) => "WHEN $id THEN $index ");
+                ->values();
 
-            $model->newModelQuery()
-                ->when(
-                    $resource->treeKey(),
-                    fn(Builder $q) => $q->where($resource->treeKey(), $request->get('parent'))
-                )
-                ->get()
-                ->each(function ($row) use($resource, $keyName, $caseStatement) {
-                    $row->update([
-                        $resource->sortKey() => DB::raw(
-                            "CASE $keyName $caseStatement ELSE {$resource->sortKey()} END"
-                        )
-                    ]);
-                });
+            foreach ($ids as $index => $id) {
+                $query = $model->newModelQuery()->where($keyName, $id);
 
+                if ($resource->treeKey()) {
+                    $query->where($resource->treeKey(), $request->get('parent'));
+                }
+
+                $query->update([
+                    $resource->sortKey() => (int) $index,
+                ]);
+            }
         }
 
         return response()->noContent();
