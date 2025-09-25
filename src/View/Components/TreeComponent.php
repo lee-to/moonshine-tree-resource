@@ -32,6 +32,11 @@ final class TreeComponent extends MoonshineComponent
         $performed = [];
         /** @var TreeResource $resource */
         $resource = $this->getResource();
+
+        $resource->setQueryParams(
+            request()->only($resource->getQueryParamsKeys())
+        );
+        
         $items = $resource?->getItems() ?? [];
 
         foreach ($items as $item) {
