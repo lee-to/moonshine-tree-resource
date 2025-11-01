@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Leeto\MoonShineTree\Resources\TreeResource;
 use MoonShine\Laravel\Http\Requests\Resources\ViewAnyFormRequest;
@@ -48,4 +46,4 @@ Route::moonshine(static function () {
 
         return response()->noContent();
     })->name('sortable');
-}, withResource: true, withPage: false, withAuthenticate: true);
+}, withResource: true, withAuthenticate: true);

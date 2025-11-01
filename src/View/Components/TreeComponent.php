@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Leeto\MoonShineTree\View\Components;
 
 use Leeto\MoonShineTree\Resources\TreeResource;
+use MoonShine\Contracts\Core\CrudResourceContract;
 use MoonShine\Core\Traits\HasResource;
-use MoonShine\Laravel\Resources\CrudResource;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\MoonShineComponent;
 
 /**
- * @method static static make(ModelResource $resource)
+ * @method static static make(CrudResourceContract $resource)
  */
 final class TreeComponent extends MoonshineComponent
 {
-    /** @use HasResource<CrudResource, CrudResource> */
+    /** @use HasResource<CrudResourceContract> */
     use HasResource;
 
     protected string $view = 'moonshine-tree::components.tree.index';
@@ -36,7 +36,7 @@ final class TreeComponent extends MoonshineComponent
         $resource->setQueryParams(
             request()->only($resource->getQueryParamsKeys())
         );
-        
+
         $items = $resource?->getItems() ?? [];
 
         foreach ($items as $item) {
@@ -58,11 +58,10 @@ final class TreeComponent extends MoonshineComponent
             'route' => $this->getResource()?->getRoute('sortable'),
             'buttons' => function ($item) {
                 $resource = $this
-                    ->getResource()
-                    ?->setItem($item);
+                    ->getResource()?->setItem($item);
 
-                return $resource
-                    ?->getIndexButtons()
+                return $resource->getIndexPage()
+                    ?->getButtons()
                     ->fill($resource->getCastedData())
                     ?->withoutBulk();
             },
