@@ -18,7 +18,8 @@ abstract class TreeResource extends ModelResource
 
     protected function activeActions(): ListOf
     {
-        return parent::activeActions()->except(Action::MASS_DELETE);
+        return parent::activeActions()
+            ->except(Action::MASS_DELETE);
     }
 
     abstract public function treeKey(): ?string;

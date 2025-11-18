@@ -1,7 +1,7 @@
 {
     "name": "lee-to/moonshine-tree-resource",
     "description": "Tree resource for moonshine",
-    "keywords": ["moonshine"],
+    "keywords": ["moonshine", "resource"],
     "type": "library",
     "homepage": "https://moonshine-laravel.com",
     "license": "MIT",
@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^8.0|^8.1|^8.2",
+        "php": "^8.2",
         "ext-curl": "*",
         "ext-json": "*"
     },
@@ -27,7 +27,7 @@
         }
     },
     "conflict": {
-        "moonshine/moonshine": "<3.0"
+        "moonshine/moonshine": "<4.0"
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
