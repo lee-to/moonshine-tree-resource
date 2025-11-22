@@ -18,5 +18,9 @@ final class MoonShineTreeServiceProvider extends ServiceProvider
         Blade::componentNamespace('Leeto\MoonShineTree\View\Components', 'moonshine-tree');
 
         $this->commands([]);
+
+        $this->publishes([
+            __DIR__ . '/../../public' => public_path('vendor/moonshine-tree'),
+        ], ['moonshine-tree-assets', 'laravel-assets']);
     }
 }
