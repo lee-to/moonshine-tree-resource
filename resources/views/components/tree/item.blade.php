@@ -4,56 +4,75 @@
     'items',
     'buttons',
 ])
-<li class="my-4"
+
+@php
+    /** @var \Leeto\MoonShineTree\Resources\TreeResource $resource */
+
+    $hash = 'tree_' . md5($item->getKey());
+@endphp
+
+<li class="tree__item"
     data-id="{{ $item->getKey() }}"
     @if($resource->wrapable())
-    x-data="{tree_show_{{ $item->getKey() }}: $persist(true).as('tree_resource_{{ $item->getKey() }}')}"
+        x-data="{show_{{ $hash }}: $persist(true).as('tree_resource_{{ $hash }}')}"
     @endif
 >
-    <x-moonshine::layout.box>
-        <div class="flex justify-between items-center gap-4">
-            <div class="@if($resource->sortable()) handle cursor-pointer @endif flex justify-start items-center gap-4">
+    <div class="tree__node">
+        <div class="tree__content">
+            <div class="tree__main">
                 @if($resource->sortable())
-                    <x-moonshine::icon icon="bars-3-bottom-right" />
+                    <div class="tree__handle">
+                        <x-moonshine::icon icon="bars-3-bottom-right"/>
+                    </div>
                 @endif
 
-                <div class="font-bold">
-                    @if($resource->showBadge())
-                        <x-moonshine::badge color="purple">{{ $item->getKey() }}</x-moonshine::badge>
+                <div class="tree__title-section">
+                    @if($resource->treeItemBadge($item))
+                        <x-moonshine::badge color="purple" class="tree__badge">
+                            {{ $resource->treeItemBadge($item) }}
+                        </x-moonshine::badge>
                     @endif
-                    {{ $item->{$resource->getColumn()} }}
+                    @if($resource->treeItemTitle($item))
+                        <div class="tree__title-text">
+                            {{ $resource->treeItemTitle($item) }}
+                        </div>
+                    @endif
                 </div>
 
-                @if($resource->wrapable())
-                    <a @click.stop="tree_show_{{ $item->getKey() }} = !tree_show_{{ $item->getKey() }}">
-                        <x-moonshine::icon icon="chevron-up-down" />
-                    </a>
+                @if($resource->treeItemDescription($item))
+                    <div class="tree__description">
+                        {!! $resource->treeItemDescription($item) !!}
+                    </div>
                 @endif
-
-                {!! $resource->itemContent($item) !!}
             </div>
 
-            <div class="flex justify-between items-center gap-4">
-                <x-moonshine::action-group
-                    :actions="$buttons($item)"
-                />
+            @if($resource->wrapable() && isset($items[$item->getKey()]))
+                <button
+                    @click.stop="show_{{ $hash }} = !show_{{ $hash }}"
+                    class="tree__toggle"
+                    :class="show_{{ $hash }} ? '' : 'icon--collapsed'">
+                    <x-moonshine::icon icon="chevron-up"/>
+                </button>
+            @endif
+
+            <div class="tree__actions">
+                <x-moonshine::action-group :actions="$buttons($item)"/>
             </div>
         </div>
 
         @if($resource->treeKey())
             <ul
+                class="tree__children tree__drop-zone"
+                x-show="show_{{ $hash }}"
                 @if($resource->sortable())
                     x-data="sortable('{{ $resource->getRoute('sortable') }}', 'nested')"
-                    class="dropzone my-4"
-                    x-show="tree_show_{{ $item->getKey() }}"
                     data-id="{{ $item->getKey() }}"
-                    data-handle=".handle"
-                    data-animation="150"
+                    data-handle=".tree__handle"
+                    data-animation="200"
                     data-fallbackOnBody="true"
-                    data-swapThreshold="0.65"
+                    data-swapThreshold="0.8"
                 @endif
             >
-
                 @if(isset($items[$item->getKey()]))
                     @foreach($items[$item->getKey()] as $inner)
                         <x-moonshine-tree::tree.item
@@ -66,5 +85,5 @@
                 @endif
             </ul>
         @endif
-    </x-moonshine::layout.box>
+    </div>
 </li>

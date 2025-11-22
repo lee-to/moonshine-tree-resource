@@ -26,9 +26,27 @@ abstract class TreeResource extends ModelResource
 
     abstract public function sortKey(): string;
 
-    public function itemContent(Model $item): string
+    public function treeItemBadge(Model $item): string
     {
         return '';
+    }
+
+    public function treeItemTitle(Model $item): string
+    {
+        return '';
+    }
+
+    public function treeItemDescription(Model $item): string
+    {
+        return '';
+    }
+
+    /**
+     * @deprecated Will be removed in 5.0
+     */
+    public function itemContent(Model $item): string
+    {
+        return $this->treeItemTitle($item);
     }
 
     public function sortable(): bool
@@ -45,5 +63,4 @@ abstract class TreeResource extends ModelResource
     {
         return true;
     }
-
 }
