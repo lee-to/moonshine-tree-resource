@@ -67,7 +67,7 @@
     height: calc(var(--spacing) * 8);
     margin-right: 0;
     flex: 0 0 auto;
-    color: var(--color-base-500);
+    color: var(--color-base-700);
     cursor: grab;
     transition: all var(--default-transition-duration) var(--default-transition-timing-function);
     border-radius: var(--radius-sm);
@@ -141,7 +141,6 @@
     min-width: 0;
 }
 
-
 .tree__title-text {
     font-weight: var(--font-weight-medium);
     font-size: var(--text-sm);
@@ -172,7 +171,7 @@
     width: calc(var(--spacing) * 5);
     height: calc(var(--spacing) * 5);
     flex: 0 0 auto;
-    color: var(--color-base-400);
+    color: var(--color-base-700);
     cursor: pointer;
     transition: all var(--default-transition-duration) var(--default-transition-timing-function);
     border-radius: var(--radius-sm);
@@ -265,7 +264,6 @@
     opacity: 1;
 }
 
-
 .tree__item.sortable-ghost .tree__content {
     opacity: 0.3;
     background-color: color-mix(in srgb, var(--color-primary) 20%, var(--color-base));
@@ -321,7 +319,6 @@
         width: calc(var(--spacing) * 5);
     }
 
-  
     .tree__toggle {
         margin-right: calc(var(--spacing) * 1);
     }
@@ -334,12 +331,6 @@
 @media (min-width: 768px) {
     .tree__badge {
         max-width: 20ch;
-    }
-
-    .tree__extra {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
     }
 }
 
@@ -430,9 +421,10 @@
         --ms-btn-square-font-size: var(--text-xs);
         --ms-btn-radius: var(--radius-md);
     }
+}
 
-    /* Responsive adjustments for compact mode */
-    @media (min-width: 640px) {
+@media (min-width: 640px) {
+    .tree--compact {
         & .tree__children {
             margin-left: calc(var(--spacing) * 4);
             padding-left: calc(var(--spacing) * 4);
