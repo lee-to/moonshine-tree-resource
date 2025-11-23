@@ -7,6 +7,7 @@ namespace Leeto\MoonShineTree\Resources;
 use Illuminate\Database\Eloquent\Model;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\Support\Enums\Action;
+use MoonShine\Support\Enums\Color;
 use MoonShine\Support\Enums\SortDirection;
 use MoonShine\Support\ListOf;
 
@@ -26,7 +27,12 @@ abstract class TreeResource extends ModelResource
 
     abstract public function sortKey(): string;
 
-    public function treeItemBadge(Model $item): string
+    public function treeItemBadgeColor(Model $item): Color
+    {
+        return Color::PURPLE;
+    }
+
+    public function treeItemBadgeText(Model $item): string
     {
         return $item->getKey() ?? '';
     }

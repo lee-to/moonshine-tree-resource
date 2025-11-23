@@ -27,9 +27,11 @@
                 @endif
 
                 <div class="tree__title-section">
-                    @if($resource->treeItemBadge($item))
-                        <x-moonshine::badge color="purple" class="tree__badge">
-                            {{ $resource->treeItemBadge($item) }}
+                    @if($resource->treeItemBadgeText($item))
+                        <x-moonshine::badge
+                            color="{{ $resource->treeItemBadgeColor($item) }}"
+                            class="tree__badge">
+                            {{ $resource->treeItemBadgeText($item) }}
                         </x-moonshine::badge>
                     @endif
                     @if($resource->treeItemTitle($item))
@@ -66,11 +68,11 @@
                 x-show="show_{{ $hash }}"
                 @if($resource->sortable())
                     x-data="sortable('{{ $resource->getRoute('sortable') }}', 'nested')"
-                    data-id="{{ $item->getKey() }}"
-                    data-handle=".tree__handle"
-                    data-animation="200"
-                    data-fallbackOnBody="true"
-                    data-swapThreshold="0.8"
+                data-id="{{ $item->getKey() }}"
+                data-handle=".tree__handle"
+                data-animation="200"
+                data-fallbackOnBody="true"
+                data-swapThreshold="0.8"
                 @endif
             >
                 @if(isset($items[$item->getKey()]))
