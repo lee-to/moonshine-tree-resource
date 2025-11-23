@@ -34,7 +34,7 @@ abstract class TreeResource extends ModelResource
 
     public function treeItemBadgeText(Model $item): string
     {
-        return $item->getKey() ?? '';
+        return (string)$item->getKey();
     }
 
     public function treeItemTitle(Model $item): string
