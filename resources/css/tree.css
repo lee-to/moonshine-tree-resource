@@ -101,7 +101,6 @@
     border-radius: var(--radius-md);
     background-color: var(--color-base);
     border: 1px solid var(--color-base-300);
-    min-height: calc(var(--spacing) * 7);
 }
 
 .tree__content:hover {
@@ -141,6 +140,7 @@
     flex-shrink: 1;
     min-width: 0;
 }
+
 
 .tree__title-text {
     font-weight: var(--font-weight-medium);
@@ -295,7 +295,6 @@
         gap: calc(var(--spacing) * 2);
         padding: calc(var(--spacing) * 2) calc(var(--spacing) * 2);
         margin: calc(var(--spacing) * 1) 0;
-        min-height: calc(var(--spacing) * 9);
     }
 
     .tree__handle .icon {
@@ -322,6 +321,7 @@
         width: calc(var(--spacing) * 5);
     }
 
+  
     .tree__toggle {
         margin-right: calc(var(--spacing) * 1);
     }
@@ -370,6 +370,83 @@
 @media (min-width: 1536px) {
     .tree__badge {
         max-width: 35ch;
+    }
+}
+
+/* Compact mode styles */
+.tree--compact {
+    & .tree__content {
+        padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+        margin: calc(var(--spacing) * 0.75) 0;
+    }
+
+    & .tree__title-text,
+    & .tree__description {
+        font-size: var(--text-xs);
+    }
+
+    & .tree__badge {
+        --ms-badge-padding-x: calc(var(--spacing) * 1.5);
+        --ms-badge-padding-y: calc(var(--spacing) * 0.25);
+    }
+
+    & .tree__toggle {
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
+    }
+
+    & .tree__toggle .icon {
+        width: calc(var(--spacing) * 3);
+        height: calc(var(--spacing) * 3);
+    }
+
+    & .tree__handle {
+        width: calc(var(--spacing) * 6);
+        height: calc(var(--spacing) * 6);
+    }
+
+    & .tree__handle .icon {
+        width: calc(var(--spacing) * 3);
+        height: calc(var(--spacing) * 3);
+    }
+
+    & .tree__children {
+        margin-left: calc(var(--spacing) * 3);
+        padding-left: calc(var(--spacing) * 3);
+    }
+
+    & .tree__children .tree__children {
+        margin-left: calc(var(--spacing) * 3);
+        padding-left: calc(var(--spacing) * 3);
+    }
+
+    & .tree__children > .tree__item .tree__content::before {
+        left: calc(var(--spacing) * -3);
+        width: calc(var(--spacing) * 3);
+    }
+
+    & .btn-square {
+        --ms-btn-square-size: calc(var(--spacing) * 6);
+        --ms-btn-square-font-size: var(--text-xs);
+        --ms-btn-radius: var(--radius-md);
+    }
+
+    /* Responsive adjustments for compact mode */
+    @media (min-width: 640px) {
+        & .tree__children {
+            margin-left: calc(var(--spacing) * 4);
+            padding-left: calc(var(--spacing) * 4);
+        }
+
+        & .tree__children .tree__children {
+            margin-left: calc(var(--spacing) * 4);
+            padding-left: calc(var(--spacing) * 4);
+        }
+
+        & .tree__children > .tree__item .tree__content::before {
+            left: calc(var(--spacing) * -4);
+            width: calc(var(--spacing) * 4);
+        }
     }
 }
 

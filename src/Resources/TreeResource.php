@@ -59,8 +59,8 @@ abstract class TreeResource extends ModelResource
         return true;
     }
 
-    public function showBadge(): bool
+    public function isCompactTree(): bool
     {
-        return true;
+        return false;
     }
 }
