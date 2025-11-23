@@ -1,0 +1,13 @@
+{
+    "name": "moonshine-tree-resource",
+    "private": true,
+    "version": "4.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^7.2"
+    }
+}

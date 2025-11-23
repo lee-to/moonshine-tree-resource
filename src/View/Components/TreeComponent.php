@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Leeto\MoonShineTree\View\Components;
 
 use Leeto\MoonShineTree\Resources\TreeResource;
+use MoonShine\AssetManager\Css;
 use MoonShine\Contracts\Core\CrudResourceContract;
 use MoonShine\Core\Traits\HasResource;
 use MoonShine\Laravel\Resources\ModelResource;
@@ -48,6 +49,13 @@ final class TreeComponent extends MoonshineComponent
         }
 
         return $performed;
+    }
+
+    protected function assets(): array
+    {
+        return [
+            Css::make('vendor/moonshine-tree/tree.css'),
+        ];
     }
 
     protected function viewData(): array

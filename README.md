@@ -1,4 +1,6 @@
-## MoonShine sortable tree resource
+## MoonShine Sortable Tree Resource
+
+A modern, responsive tree component for MoonShine with drag & drop sorting, compact mode, and customizable content display.
 
 <p align="center">
 <a href="https://moonshine-laravel.com" target="_blank">
@@ -6,11 +8,20 @@
 </a>
 </p>
 
+## Features
+
+- 🚀 **Drag & Drop Sorting** - Sort and reorder items with ease
+- 📱 **Mobile First Design** - Responsive and touch-friendly
+- 🎯 **Compact Mode** - Dense layout for data-heavy interfaces
+- 🎨 **Customizable Content** - Flexible title, badge, and description
+- 🌓 **Dark Mode Support** - Integrates seamlessly with MoonShine themes
+- ⚡ **Optimized Performance** - Lightweight CSS with MoonShine tokens
+
 ### Requirements
 
 - MoonShine v4.0+
 
-### Support MoonShine versions
+## Compatibility
 
 | MoonShine | TreeResource |
 |-----------|--------------|
@@ -24,132 +35,99 @@
 composer require lee-to/moonshine-tree-resource
 ```
 
-### Get started
+## Quick Start
 
-Example usage with tree
+Extend the TreeResource class instead of the base ModelResource
 
 ```php
 use Leeto\MoonShineTree\Resources\TreeResource;
 
 class CategoryResource extends TreeResource
 {
-    // Required
+    // Required properties
     protected string $column = 'title';
 
     protected string $sortColumn = 'sorting';
 
-    protected function pages(): array
-    {
-        return [
-            CategoryTreePage::class,
-            FormPage::class,
-            DetailPage::class,
-        ];
-    }
+    // ...
 
-    // ... fields, model, etc ...
-
+    // Required methods
     public function treeKey(): ?string
     {
-        return 'parent_id';
+        return 'parent_id'; // Foreign key for parent-child relationship
     }
 
     public function sortKey(): string
     {
-        return 'sorting';
+        return 'sorting'; // Column for sorting
     }
-
-    public function showBadge(): bool
-    {
-        return true;
-    }
-
-    // ...
 }
 ```
 
-And add component
+And add a component to `IndexPage`
 
 ```php
-namespace App\MoonShine\Pages;
-
 use Leeto\MoonShineTree\View\Components\TreeComponent;
-use MoonShine\Laravel\Pages\Crud\IndexPage;
 
-class CategoryTreePage extends IndexPage
-{
-    protected function mainLayer(): array
+protected function mainLayer(): array
     {
         return [
             ...$this->getPageButtons(),
             TreeComponent::make($this->getResource()),
         ];
     }
-}
-```
+````
 
-Or modify index component from `IndexPage`
+Or override list component
 
 ```php
+use Leeto\MoonShineTree\View\Components\TreeComponent;
+
 public function modifyListComponent(ComponentContract $component): ComponentContract
 {
     return TreeComponent::make($this->getResource());
 }
 ```
-Just a sortable usage
+
+## Custom Content Display
 
 ```php
-use Leeto\MoonShineTree\Resources\TreeResource;
-
-class CategoryResource extends TreeResource
+public function treeItemTitle(Model $item): string
 {
-    // Required
-    protected string $column = 'title';
+    return $item->{$this->getColumn()};
+}
 
-    protected string $sortColumn = 'sorting';
+public function treeItemBadgeText(Model $item): string
+{
+    return $item->products_count ?? ''; // Show product count as badge
+}
 
-    // ... fields, model, etc ...
+public function treeItemBadgeColor(Model $item): string
+{
+    return Color::PRIMARY; // Use Color enum for better type safety
+}
 
-    public function treeKey(): ?string
-    {
-        return null;
-    }
-
-    public function sortKey(): string
-    {
-        return 'sorting';
-    }
-
-    // ...
+public function treeItemDescription(Model $item): string
+{
+    return $item->short_description ?? ''; // Additional description
 }
 ```
 
-### Additional content
+## Configuration Options
 
 ```php
-public function itemContent(Model $item): string
-{
-    return 'Custom content here';
-}
-```
-
-### Turn off sortable or wrapable
-
-```php
-public function wrapable(): bool
-{
-    return false;
-}
-
 public function sortable(): bool
 {
-    return false;
+    return true; // Enable/disable drag & drop sorting
 }
-```
-### Turn off badge
-```php
-public function showBadge(): bool
+
+public function wrappable(): bool
 {
-    return true;
+    return true; // Enable/disable expand/collapse functionality
+}
+
+public function compactTree(): bool
+{
+    return false; // Enable compact mode for dense layouts
 }
 ```
