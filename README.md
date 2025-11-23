@@ -35,6 +35,10 @@ A modern, responsive tree component for MoonShine with drag & drop sorting, comp
 composer require lee-to/moonshine-tree-resource
 ```
 
+```shell
+php artisan vendor:publish --tag=moonshine-tree-assets
+```
+
 ## Quick Start
 
 Extend the TreeResource class instead of the base ModelResource
