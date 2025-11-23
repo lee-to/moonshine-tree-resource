@@ -57,6 +57,11 @@ abstract class TreeResource extends ModelResource
         return true;
     }
 
+    public function wrappableAll(): bool
+    {
+        return true;
+    }
+
     public function compactTree(): bool
     {
         return false;

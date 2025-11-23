@@ -4,7 +4,7 @@
 
 @if(!empty($items[0]))
     <div x-data="{tree_show_all: $persist(true).as('tree_resource_all')}" class="tree-wrapper">
-        @if($resource->wrappable())
+        @if($resource->wrappable() && $resource->wrappableAll())
             <button @click.stop="tree_show_all = !tree_show_all" class="tree-expand-all">
                 <x-moonshine::icon icon="chevron-up-down"/>
             </button>

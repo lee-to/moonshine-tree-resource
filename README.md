@@ -97,7 +97,7 @@ public function treeItemTitle(Model $item): string
     return $item->{$this->getColumn()};
 }
 
-public function treeItemBadge(Model $item): string
+public function treeItemBadgeText(Model $item): string
 {
     return $item->products_count ?? ''; // Show product count as badge
 }
@@ -111,36 +111,6 @@ public function treeItemDescription(Model $item): string
 {
     return $item->short_description ?? ''; // Additional description
 }
-```
-
-### Custom Badge Colors
-
-Use MoonShine Color enum for type-safe color selection:
-
-```php
-use MoonShine\Support\Enums\Color;
-
-public function treeItemBadgeColor(Model $item): string
-{
-    // Dynamic colors based on item properties
-    return match($item->status) {
-        'active' => Color::SUCCESS,
-        'pending' => Color::WARNING,
-        'inactive' => Color::SECONDARY,
-        'archived' => Color::GRAY,
-        default => Color::PRIMARY,
-    };
-}
-```
-
-Available colors from MoonShine Color enum:
-- `Color::PRIMARY` - Main theme color
-- `Color::SECONDARY` - Secondary color
-- `Color::SUCCESS` - Green for success states
-- `Color::WARNING` - Yellow/orange for warnings
-- `Color::ERROR` - Red for errors
-- `Color::INFO` - Blue for information
-- `Color::GRAY` - Gray colors
 ```
 
 ## Configuration Options
