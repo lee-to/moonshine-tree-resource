@@ -13,7 +13,7 @@
 
 <li class="tree__item"
     data-id="{{ $item->getKey() }}"
-    @if($resource->wrapable())
+    @if($resource->wrappable())
         x-data="{show_{{ $hash }}: $persist(true).as('tree_resource_{{ $hash }}')}"
     @endif
 >
@@ -46,7 +46,7 @@
                 @endif
             </div>
 
-            @if($resource->wrapable() && isset($items[$item->getKey()]))
+            @if($resource->wrappable() && isset($items[$item->getKey()]))
                 <button
                     @click.stop="show_{{ $hash }} = !show_{{ $hash }}"
                     class="tree__toggle"

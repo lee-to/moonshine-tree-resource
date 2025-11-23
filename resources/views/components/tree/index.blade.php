@@ -4,14 +4,14 @@
 
 @if(!empty($items[0]))
     <div x-data="{tree_show_all: $persist(true).as('tree_resource_all')}" class="tree-wrapper">
-        @if($resource->wrapable())
+        @if($resource->wrappable())
             <button @click.stop="tree_show_all = !tree_show_all" class="tree-expand-all">
                 <x-moonshine::icon icon="chevron-up-down"/>
             </button>
         @endif
 
         <ul
-            class="tree @if($resource->isCompactTree()) tree--compact @endif"
+            class="tree @if($resource->compactTree()) tree--compact @endif"
             x-show="tree_show_all"
             @if($resource->sortable())
                 x-data="sortable('{{ $route }}', 'nested')"

@@ -28,12 +28,12 @@ abstract class TreeResource extends ModelResource
 
     public function treeItemBadge(Model $item): string
     {
-        return '';
+        return $item->getKey() ?? '';
     }
 
     public function treeItemTitle(Model $item): string
     {
-        return '';
+        return $item->{$this->getColumn()} ?? '';
     }
 
     public function treeItemDescription(Model $item): string
@@ -41,25 +41,17 @@ abstract class TreeResource extends ModelResource
         return '';
     }
 
-    /**
-     * @deprecated Will be removed in 5.0
-     */
-    public function itemContent(Model $item): string
-    {
-        return $this->treeItemTitle($item);
-    }
-
     public function sortable(): bool
     {
         return true;
     }
 
-    public function wrapable(): bool
+    public function wrappable(): bool
     {
         return true;
     }
 
-    public function isCompactTree(): bool
+    public function compactTree(): bool
     {
         return false;
     }
