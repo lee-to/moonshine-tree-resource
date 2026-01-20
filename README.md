@@ -93,6 +93,30 @@ public function modifyListComponent(ComponentContract $component): ComponentCont
 }
 ```
 
+## Update on changes (4.0+)
+
+```php
+public function getListComponentName(): string
+{
+    return 'tree-component';
+}
+
+public function getListEventType(): JsEvent
+{
+    return JsEvent::FRAGMENT_UPDATED;
+}
+
+protected function mainLayer(): array
+{
+    return [
+        ...$this->getButtons(),
+        Fragment::make([
+            TreeComponent::make($this->getResource()),
+        ])->name('tree-component'),
+    ];
+}
+```
+
 ## Custom Content Display
 
 ```php
