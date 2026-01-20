@@ -76,7 +76,7 @@ use Leeto\MoonShineTree\View\Components\TreeComponent;
 protected function mainLayer(): array
     {
         return [
-            ...$this->getPageButtons(),
+            ...$this->getPageButtons(), // $this->getButtons() in 4.0+
             TreeComponent::make($this->getResource()),
         ];
     }
